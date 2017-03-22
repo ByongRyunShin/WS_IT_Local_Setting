@@ -21,6 +21,7 @@ public class SettingMain {
 				stmt.execute("drop database `" + s + "`");
 			}
 		}
+		rs.close();
 		
 		//새로운 DB 생성
 		stmt.execute("CREATE SCHEMA `sw3_01` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ;");
@@ -72,5 +73,14 @@ public class SettingMain {
 			c++;
 		}
 		br.close();
+		
+		
+		//사용자  user 생성(존재하면 생성안함)
+		stmt.execute("create user IF NOT EXISTS user@localhost identified by '1234';");
+		stmt.execute("grant select, insert, delete, update on `sw3_01`.* to user@localhost;");
+		
+		stmt.close();
+		con.close();
+		
 	}
 }
