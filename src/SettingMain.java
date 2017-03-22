@@ -1,4 +1,5 @@
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.sql.Connection;
@@ -35,7 +36,7 @@ public class SettingMain {
 		int c=0; //첫줄 넘기기위한 카운트
 		String line=null;
 		String cur=System.getProperty("user.dir"); //현재 프로젝트 경로
-		BufferedReader br=new BufferedReader(new InputStreamReader(new FileInputStream(cur+"\\DataFiles\\TBL_CUSTOMER.txt"),"UTF8"));
+		BufferedReader br=new BufferedReader(new InputStreamReader(new FileInputStream(cur+File.separator+"DataFiles"+File.separator+"TBL_CUSTOMER.txt"),"UTF8"));
 		while((line=br.readLine())!=null){
 			if(c!=0)
 			{
@@ -49,7 +50,7 @@ public class SettingMain {
 		//tbl_bus 테이블 데이터삽입
 		c=0;
 		line=null;
-		br=new BufferedReader(new InputStreamReader(new FileInputStream(cur+"\\DataFiles\\TBL_BUS.txt"),"UTF8"));
+		br=new BufferedReader(new InputStreamReader(new FileInputStream(cur+File.separator+"DataFiles"+File.separator+"TBL_BUS.txt"),"UTF8"));
 		while((line=br.readLine())!=null){
 			if(c!=0)
 			{
@@ -63,7 +64,7 @@ public class SettingMain {
 		//tbl_ticket 테이블 데이터삽입
 		c=0;
 		line=null;
-		br=new BufferedReader(new InputStreamReader(new FileInputStream(cur+"\\DataFiles\\TBL_TICKET.txt"),"UTF8"));
+		br=new BufferedReader(new InputStreamReader(new FileInputStream(cur+File.separator+"DataFiles"+File.separator+"TBL_TICKET.txt"),"UTF8"));
 		while((line=br.readLine())!=null){
 			if(c!=0)
 			{
