@@ -1,3 +1,6 @@
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -26,6 +29,48 @@ public class SettingMain {
 		stmt.execute("CREATE TABLE `sw3_01`.`tbl_customer` (  `cID` VARCHAR(6) NOT NULL,  `cPW` VARCHAR(4) NULL,  `cName` VARCHAR(10) NULL,  `cHP` VARCHAR(13) NULL,  PRIMARY KEY (`cID`));");
 		stmt.execute("CREATE TABLE `sw3_01`.`tbl_bus` (  `bNumber` VARCHAR(4) NOT NULL,  `bDeparture` VARCHAR(5) NULL,  `bArrival` VARCHAR(5) NULL,  `bTime` TIME NULL,  `bElapse` VARCHAR(10) NULL,  `bCount` VARCHAR(1) NULL,`bPrice` INT(6) NULL,PRIMARY KEY (`bNumber`));");
 		stmt.execute("CREATE TABLE `sw3_01`.`tbl_ticket` (  `bDate` DATE NULL,  `bNumber` VARCHAR(4) NULL,  `bNumber2` VARCHAR(5) NULL,  `bSeat` INT(2) NULL,  `cID` VARCHAR(6) NULL,  `bPrice` INT(6) NULL,  `bState` VARCHAR(1) NULL);");
-
+		
+		//tbl_customer테이블 데이터삽입
+		int c=0; //첫줄 넘기기위한 카운트
+		String line=null;
+		String cur=System.getProperty("user.dir"); //현재 프로젝트 경로
+		BufferedReader br=new BufferedReader(new InputStreamReader(new FileInputStream(cur+"\\DataFiles\\TBL_CUSTOMER.txt"),"UTF8"));
+		while((line=br.readLine())!=null){
+			if(c!=0)
+			{
+				String word[]=line.trim().split("\t");
+				stmt.execute("insert into `sw3_01`.`tbl_customer` values('" + word[0] +"','" + word[1] +"','" + word[2] +"','" + word[3] +"')");
+			}
+			c++;
+		}
+		br.close();
+		
+		//tbl_bus 테이블 데이터삽입
+		c=0;
+		line=null;
+		br=new BufferedReader(new InputStreamReader(new FileInputStream(cur+"\\DataFiles\\TBL_BUS.txt"),"UTF8"));
+		while((line=br.readLine())!=null){
+			if(c!=0)
+			{
+				String word[]=line.trim().split("\t");
+				stmt.execute("insert into `sw3_01`.`tbl_bus` values('" + word[0] +"','" + word[1] +"','" + word[2] +"','" + word[3] +"','" + word[4] +"','" + word[5] +"','" + word[6] +"')");
+			}
+			c++;
+		}
+		br.close();
+		
+		//tbl_ticket 테이블 데이터삽입
+		c=0;
+		line=null;
+		br=new BufferedReader(new InputStreamReader(new FileInputStream(cur+"\\DataFiles\\TBL_TICKET.txt"),"UTF8"));
+		while((line=br.readLine())!=null){
+			if(c!=0)
+			{
+				String word[]=line.trim().split("\t");
+				stmt.execute("insert into `sw3_01`.`tbl_ticket` values('" + word[0] +"','" + word[1] +"','" + word[2] +"','" + word[3] +"','" + word[4] +"','" + word[5] +"','" + word[6] +"')");
+			}
+			c++;
+		}
+		br.close();
 	}
 }
